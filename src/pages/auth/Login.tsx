@@ -1,6 +1,12 @@
 import DeafultLogo from "../../components/DeafultLogo"
 import Text from "../../components/Text"
 const Login = () => {
+
+  const handleSubmit=(e:React.ChangeEvent<HTMLInputElement>)=>{
+   e.preventDefault();
+   console.log('s')
+  }
+
   return (
     <>
       <div className="flex justify-center items-center m-12.5">
@@ -17,7 +23,9 @@ const Login = () => {
               <p className="font-normal text-[16px] text-[#737373]">Add your details below to get back into the app</p>
               </div>
 
-            <div className="flex flex-col gap-6">
+            <form  onSubmit={handleSubmit}>
+
+                <div className="flex flex-col gap-6">
               <div className="flex flex-col">
                 <label  htmlFor="email">Email</label>
                 <input type="text" placeholder="e.g. alex@email.com" id="email"/>
@@ -25,7 +33,7 @@ const Login = () => {
 
               <div className="flex flex-col">
                 <label htmlFor="password">Password</label>
-                <input type="text" />
+                <input type="text" id="password" placeholder="Enter Your password" />
               </div>
               <button className="bg-[#633CFF] rounded-lg w-99 h-11.5 text-[#FFFFFF]">Login</button>
               <div className="text-center">
@@ -33,6 +41,7 @@ const Login = () => {
               </div>
 
             </div>
+            </form>
            </div>
           </div>
 
