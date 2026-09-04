@@ -3,7 +3,7 @@ import SolarIocn  from '../assets/icons/solar_link-circle-bold.png'
 const DeafultLogo = () => {
   return (
     <div>
-     <img src={SolarIocn} alt="" srcset="" />
+     <img src={SolarIocn} alt=""  />
     </div>
   )
 }
