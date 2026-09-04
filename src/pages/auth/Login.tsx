@@ -1,31 +1,41 @@
 import { useForm, type SubmitHandler } from "react-hook-form"
 import DeafultLogo from "../../components/DeafultLogo"
 import Text from "../../components/Text"
+import { z } from 'zod'
+import { zodResolver } from "@hookform/resolvers/zod"
 
 
 
-type FormsFields ={
-email:string;
-password:string;
-}
+
+const schema = z.object({
+  email: z.email(),
+  password: z.string().min(8),
+})
+
+type FormsFields = z.infer<typeof schema>;
+
 const Login = () => {
 
-const {register,
-   handleSubmit,
-   setError,
-  formState:{errors,isSubmitting}} = useForm<FormsFields>()
 
-const onSubmit:SubmitHandler<FormsFields> = async(data)=>{
-try{
- await new Promise((resolve)=> setTimeout(resolve,1000))  
- throw new Error()
-}catch(error){
-setError('root',{
- message:'This email is already taken'
-})
-}
-console.log(data)
-}
+
+  const { register,
+    handleSubmit,
+    setError,
+    formState: { errors, isSubmitting } } = useForm<FormsFields>({
+      resolver: zodResolver(schema),
+    })
+
+  const onSubmit: SubmitHandler<FormsFields> = async (data) => {
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 1000))
+      throw new Error()
+    } catch (error) {
+      setError('root', {
+        message: 'This email is already taken'
+      })
+    }
+    console.log(data)
+  }
 
 
   return (
@@ -50,19 +60,11 @@ console.log(data)
                   <div className="flex flex-col">
                     <label htmlFor="email">Email</label>
                     <input
-                     {...register('email',{
-                      required:'Email is required',
-                       validate:(value)=>{
-                        if(!value.includes('@')){
-                         return "Email is requried";
-                        }
-                        return true
-                       }
-                     })}
+                      {...register('email')}
                       type="text"
                       placeholder="e.g. alex@email.com"
                       id="email"
-                    
+
                     />
                     {errors.email && <div className="text-red-600">{errors.email.message}</div>}
                   </div>
@@ -70,26 +72,20 @@ console.log(data)
                   <div className="flex flex-col">
                     <label htmlFor="password">Password</label>
                     <input type="text"
-                     {...register('password',{
-                      required:'Password is requried',
-                      minLength:{
-                       value:8,
-                       message: 'Password must contain 8 characters'
-                      },
-                     })}
+                      {...register('password')}
                       id="password"
                       placeholder="Enter Your password"
 
                     />
                     {errors.password && <div className="text-red-600">{errors.password.message}</div>}
                   </div>
-                     {errors.root && <div className="text-red-600">{errors.root.message}</div>}
-                  <button disabled={isSubmitting} className="bg-[#633CFF] rounded-lg w-99 h-11.5 text-[#FFFFFF]">{isSubmitting ? 'Loading...':'Login'}</button>
+                  {errors.root && <div className="text-red-600">{errors.root.message}</div>}
+                  <button disabled={isSubmitting} className="bg-[#633CFF] cursor-pointer rounded-lg w-99 h-11.5 text-[#FFFFFF]">{isSubmitting ? 'Loading...' : 'Login'}</button>
                   <div className="text-center">
                     <span className="text-[16px] font-normal">Don’t have an account? <button className=" text-[#633CFF]">Create account</button></span>
                   </div>
                 </div>
-                
+
               </form>
             </div>
           </div>
