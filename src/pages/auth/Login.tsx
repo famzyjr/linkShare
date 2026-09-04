@@ -3,15 +3,27 @@ import DeafultLogo from "../../components/DeafultLogo"
 import Text from "../../components/Text"
 
 
+
 type FormsFields ={
 email:string;
 password:string;
 }
 const Login = () => {
 
-const {register,handleSubmit} = useForm<FormsFields>()
+const {register,
+   handleSubmit,
+   setError,
+  formState:{errors,isSubmitting}} = useForm<FormsFields>()
 
-const onSubmit:SubmitHandler<FormsFields> =(data)=>{
+const onSubmit:SubmitHandler<FormsFields> = async(data)=>{
+try{
+ await new Promise((resolve)=> setTimeout(resolve,1000))  
+ throw new Error()
+}catch(error){
+setError('root',{
+ message:'This email is already taken'
+})
+}
 console.log(data)
 }
 
@@ -38,30 +50,46 @@ console.log(data)
                   <div className="flex flex-col">
                     <label htmlFor="email">Email</label>
                     <input
-                     {...register('email')}
+                     {...register('email',{
+                      required:'Email is required',
+                       validate:(value)=>{
+                        if(!value.includes('@')){
+                         return "Email is requried";
+                        }
+                        return true
+                       }
+                     })}
                       type="text"
                       placeholder="e.g. alex@email.com"
                       id="email"
-
+                    
                     />
-
+                    {errors.email && <div className="text-red-600">{errors.email.message}</div>}
                   </div>
 
                   <div className="flex flex-col">
                     <label htmlFor="password">Password</label>
                     <input type="text"
-                     {...register('password')}
+                     {...register('password',{
+                      required:'Password is requried',
+                      minLength:{
+                       value:8,
+                       message: 'Password must contain 8 characters'
+                      },
+                     })}
                       id="password"
                       placeholder="Enter Your password"
 
                     />
+                    {errors.password && <div className="text-red-600">{errors.password.message}</div>}
                   </div>
-                  <button className="bg-[#633CFF] rounded-lg w-99 h-11.5 text-[#FFFFFF]">Login</button>
+                     {errors.root && <div className="text-red-600">{errors.root.message}</div>}
+                  <button disabled={isSubmitting} className="bg-[#633CFF] rounded-lg w-99 h-11.5 text-[#FFFFFF]">{isSubmitting ? 'Loading...':'Login'}</button>
                   <div className="text-center">
                     <span className="text-[16px] font-normal">Don’t have an account? <button className=" text-[#633CFF]">Create account</button></span>
                   </div>
-
                 </div>
+                
               </form>
             </div>
           </div>
