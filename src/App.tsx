@@ -1,11 +1,11 @@
-import AuthLayout from "./components/layout/AuthLayout"
+import AuthLayout from "./components/layout/AppRoutes"
+
 
 
 const App = () => {
   return (
     <div>
     <AuthLayout/>
-
     </div>
   )
 }
