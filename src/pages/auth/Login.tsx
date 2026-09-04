@@ -1,10 +1,19 @@
-
-
+import { useForm, type SubmitHandler } from "react-hook-form"
 import DeafultLogo from "../../components/DeafultLogo"
 import Text from "../../components/Text"
 
+
+type FormsFields ={
+email:string;
+password:string;
+}
 const Login = () => {
 
+const {register,handleSubmit} = useForm<FormsFields>()
+
+const onSubmit:SubmitHandler<FormsFields> =(data)=>{
+console.log(data)
+}
 
 
   return (
@@ -23,13 +32,13 @@ const Login = () => {
                 <p className="font-normal text-[16px] text-[#737373]">Add your details below to get back into the app</p>
               </div>
 
-              <form  >
+              <form onSubmit={handleSubmit(onSubmit)} >
 
                 <div className="flex flex-col gap-6">
                   <div className="flex flex-col">
                     <label htmlFor="email">Email</label>
                     <input
-
+                     {...register('email')}
                       type="text"
                       placeholder="e.g. alex@email.com"
                       id="email"
@@ -41,7 +50,7 @@ const Login = () => {
                   <div className="flex flex-col">
                     <label htmlFor="password">Password</label>
                     <input type="text"
-
+                     {...register('password')}
                       id="password"
                       placeholder="Enter Your password"
 
