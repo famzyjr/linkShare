@@ -1,1 +1,18 @@
 @import "tailwindcss";
+
+body{
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+background-color:#FAFAFA;
+}
+
+input {
+    /* Syntax: width | style | color */
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 2px solid #D9D9D9; 
+    width: 396px;
+    height: 48px;
+    outline: none; /* Keeps the browser from overriding your style on click */
+}
