@@ -84,7 +84,7 @@ const Login = () => {
                   {errors.root && <div className="text-red-600">{errors.root.message}</div>}
                   <button disabled={isSubmitting} className="bg-[#633CFF] cursor-pointer rounded-lg w-99 h-11.5 text-[#FFFFFF]">{isSubmitting ? 'Loading...' : 'Login'}</button>
                   <div className="text-center">
-                    <span className="text-[16px] font-normal">Don’t have an account? <button className=" text-[#633CFF]"><Link to='/Signup'>Create account</Link></button></span>
+                    <span className="text-[16px] font-normal">Don’t have an account? <button className=" text-[#633CFF]"><Link to='/signup'>Create account</Link></button></span>
                   </div>
                 </div>
 

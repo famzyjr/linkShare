@@ -3,7 +3,7 @@ import DeafultLogo from "../../components/DeafultLogo"
 import Text from "../../components/Text"
 import { z } from 'zod'
 import { zodResolver } from "@hookform/resolvers/zod"
-
+import { Link } from "react-router-dom"
 
 
 
@@ -123,7 +123,7 @@ const SignUp = () => {
                                     {errors.root && <div className="text-red-600">{errors.root.message}</div>}
                                     <button disabled={isSubmitting} className="bg-[#633CFF] cursor-pointer rounded-lg w-99 h-11.5 text-[#FFFFFF]">{isSubmitting ? 'Loading...' : 'Login'}</button>
                                     <div className="text-center">
-                                        <span className="text-[16px] font-normal">Already have an account ? <button className=" text-[#633CFF]">Login</button></span>
+                                        <span className="text-[16px] font-normal">Already have an account ? <button className=" text-[#633CFF]"><Link to='/login'>Login</Link></button></span>
                                     </div>
                                 </div>
 

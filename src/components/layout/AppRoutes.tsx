@@ -5,8 +5,8 @@ const AuthLayout = () => {
   return (
     <div>
    <Routes>
-      <Route path="/Login" element={<Login />} />
-      <Route path="/Signup" element={<SignUp />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<SignUp />} />
     </Routes>
     </div>
   )
