@@ -1,10 +1,11 @@
 import { useForm, type SubmitHandler } from "react-hook-form"
 import DeafultLogo from "../../components/DeafultLogo"
 import Text from "../../components/Text"
-import {  z } from 'zod'
+import { z } from 'zod'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Link } from "react-router-dom"
-import {createUserWithEmailAndPassword,
+import {
+    createUserWithEmailAndPassword,
 } from "firebase/auth";
 import { auth } from './firebase/firebaseConfig'
 // import { useNavigate } from "react-router-dom"
@@ -47,7 +48,7 @@ const schema = z.object({
         }
     })
 
-    // const navigate = useNavigate();
+// const navigate = useNavigate('/login')
 
 type FormsFields = z.infer<typeof schema>;
 
@@ -59,6 +60,11 @@ const SignUp = () => {
         reset,
         formState: { errors, isSubmitting } } = useForm<FormsFields>({
             resolver: zodResolver(schema),
+            defaultValues: {
+                email: "",
+                password: "",
+                confirmPassword: "",
+            },
         })
 
     const onSubmit: SubmitHandler<FormsFields> = async (data) => {
@@ -72,6 +78,7 @@ const SignUp = () => {
             const user = userCredential.user;
             console.log(user)
             reset()
+            // navigate('/login')
         } catch (error: any) {
             if (error.code === "auth/email-already-in-use") {
                 setError("root", {
@@ -141,7 +148,7 @@ const SignUp = () => {
                                     {errors.root && <div className="text-red-600">{errors.root.message}</div>}
                                     <button disabled={isSubmitting} className="bg-[#633CFF] cursor-pointer rounded-lg w-99 h-11.5 text-[#FFFFFF]">{isSubmitting ? 'Loading...' : 'Login'}</button>
                                     <div className="text-center">
-                                        <span className="text-[16px] font-normal">Already have an account ? <button className=" text-[#633CFF]"><Link to='/login'>Login</Link></button></span>
+                                        <span className="text-[16px] font-normal">Already have an account ? <button disabled={isSubmitting} className=" text-[#633CFF]"><Link to='/login'>{isSubmitting ? 'Loading...' : 'Create account'}</Link></button></span>
                                     </div>
                                 </div>
 
