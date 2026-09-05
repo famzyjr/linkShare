@@ -1,11 +1,13 @@
 import { useForm, type SubmitHandler } from "react-hook-form"
 import DeafultLogo from "../../components/DeafultLogo"
 import Text from "../../components/Text"
-import { z } from 'zod'
+import {  z } from 'zod'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Link } from "react-router-dom"
-
-
+import {createUserWithEmailAndPassword,
+} from "firebase/auth";
+import { auth } from './firebase/firebaseConfig'
+// import { useNavigate } from "react-router-dom"
 
 const schema = z.object({
     email: z.email(),
@@ -31,7 +33,7 @@ const schema = z.object({
             message: "Password must contain at least one special character",
         }),
     confirmPassword: z.string().min(1, {
-      message: "Please confirm your password",
+        message: "Please confirm your password",
     }),
 })
 
@@ -44,6 +46,9 @@ const schema = z.object({
             })
         }
     })
+
+    // const navigate = useNavigate();
+
 type FormsFields = z.infer<typeof schema>;
 
 const SignUp = () => {
@@ -51,19 +56,32 @@ const SignUp = () => {
     const { register,
         handleSubmit,
         setError,
-         reset,
+        reset,
         formState: { errors, isSubmitting } } = useForm<FormsFields>({
             resolver: zodResolver(schema),
         })
 
     const onSubmit: SubmitHandler<FormsFields> = async (data) => {
+
         try {
-            await new Promise((resolve) => setTimeout(resolve, 1000))
+            const userCredential = await createUserWithEmailAndPassword(
+                auth,
+                data.email,
+                data.password,
+            )
+            const user = userCredential.user;
+            console.log(user)
             reset()
-        } catch (error) {
-            setError('root', {
-                message: 'This email is already taken'
-            })
+        } catch (error: any) {
+            if (error.code === "auth/email-already-in-use") {
+                setError("root", {
+                    message: "This email is already registered.",
+                });
+            } else {
+                setError("root", {
+                    message: "Something went wrong. Please try again.",
+                });
+            }
         }
         console.log(data)
     }
