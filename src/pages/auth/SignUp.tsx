@@ -30,6 +30,7 @@ const schema = z.object({
     .regex(/[^A-Za-z0-9]/, {
       message: "Password must contain at least one special character",
     }),
+ confirmPassword: z.string()
 })
 
 type FormsFields = z.infer<typeof schema>;
