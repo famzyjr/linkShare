@@ -41,7 +41,7 @@ const Login = () => {
 
       // The signed-in user info
       const user = userCredential.user;
-      console.log(user)
+    
       reset()
     }catch (error: any) {
   if (error.code === "auth/invalid-credential") {
@@ -58,7 +58,7 @@ const Login = () => {
     });
   }
 }
-    console.log(data)
+   
   }
 
 

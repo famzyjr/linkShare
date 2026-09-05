@@ -76,7 +76,7 @@ const SignUp = () => {
                 data.password,
             )
             const user = userCredential.user;
-            console.log(user)
+       
             reset()
             // navigate('/login')
         } catch (error: any) {
@@ -90,7 +90,7 @@ const SignUp = () => {
                 });
             }
         }
-        console.log(data)
+     
     }
 
 
