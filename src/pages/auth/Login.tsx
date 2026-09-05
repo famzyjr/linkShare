@@ -43,11 +43,21 @@ const Login = () => {
       const user = userCredential.user;
       console.log(user)
       reset()
-    } catch (error) {
-      setError('root', {
-        message: 'This email is already taken'
-      })
-    }
+    }catch (error: any) {
+  if (error.code === "auth/invalid-credential") {
+    setError("root", {
+      message: "Incorrect email or password.",
+    });
+  } else if (error.code === "auth/too-many-requests") {
+    setError("root", {
+      message: "Too many failed attempts. Please try again later.",
+    });
+  } else {
+    setError("root", {
+      message: "Unable to log in. Please try again.",
+    });
+  }
+}
     console.log(data)
   }
 
