@@ -4,7 +4,10 @@ import Text from "../../components/Text"
 import { z } from 'zod'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Link } from "react-router-dom"
-
+import {
+    signInWithEmailAndPassword,
+} from "firebase/auth";
+import { auth } from './firebase/firebaseConfig'
 
 
 const schema = z.object({
@@ -23,14 +26,23 @@ const Login = () => {
   const { register,
     handleSubmit,
     setError,
+    reset,
     formState: { errors, isSubmitting } } = useForm<FormsFields>({
       resolver: zodResolver(schema),
     })
 
   const onSubmit: SubmitHandler<FormsFields> = async (data) => {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000))
-      throw new Error()
+       const userCredential = await signInWithEmailAndPassword(
+        auth,
+        data.email,
+        data.password
+      );
+
+      // The signed-in user info
+      const user = userCredential.user;
+      console.log(user)
+      reset()
     } catch (error) {
       setError('root', {
         message: 'This email is already taken'
