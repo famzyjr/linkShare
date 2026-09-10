@@ -5,7 +5,7 @@ import { z } from 'zod'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Link } from "react-router-dom"
 import {
-    signInWithEmailAndPassword,
+  signInWithEmailAndPassword,
 } from "firebase/auth";
 import { auth } from './firebase/firebaseConfig'
 import { useNavigate } from "react-router-dom"
@@ -16,24 +16,28 @@ const schema = z.object({
     message: "Password is required",
 
   })
-  
+
 })
 
 type FormsFields = z.infer<typeof schema>;
 
 const Login = () => {
-const navigate = useNavigate();
+  const navigate = useNavigate();
   const { register,
     handleSubmit,
     setError,
     reset,
     formState: { errors, isSubmitting } } = useForm<FormsFields>({
       resolver: zodResolver(schema),
+      defaultValues: {
+        email: "",
+        password: "",
+      }
     })
 
   const onSubmit: SubmitHandler<FormsFields> = async (data) => {
     try {
-       const userCredential = await signInWithEmailAndPassword(
+      const userCredential = await signInWithEmailAndPassword(
         auth,
         data.email,
         data.password
@@ -41,25 +45,25 @@ const navigate = useNavigate();
 
       // The signed-in user info
       const user = userCredential.user;
-    
+
       reset()
-       navigate('/dashboard')
-    }catch (error: any) {
-  if (error.code === "auth/invalid-credential") {
-    setError("root", {
-      message: "Incorrect email or password.",
-    });
-  } else if (error.code === "auth/too-many-requests") {
-    setError("root", {
-      message: "Too many failed attempts. Please try again later.",
-    });
-  } else {
-    setError("root", {
-      message: "Unable to log in. Please try again.",
-    });
-  }
-}
-   
+      navigate('/dashboard')
+    } catch (error: any) {
+      if (error.code === "auth/invalid-credential") {
+        setError("root", {
+          message: "Incorrect email or password.",
+        });
+      } else if (error.code === "auth/too-many-requests") {
+        setError("root", {
+          message: "Too many failed attempts. Please try again later.",
+        });
+      } else {
+        setError("root", {
+          message: "Unable to log in. Please try again.",
+        });
+      }
+    }
+
   }
 
 
