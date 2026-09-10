@@ -8,7 +8,7 @@ import {
     createUserWithEmailAndPassword,
 } from "firebase/auth";
 import { auth } from './firebase/firebaseConfig'
-// import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 const schema = z.object({
     email: z.email(),
@@ -48,12 +48,12 @@ const schema = z.object({
         }
     })
 
-// const navigate = useNavigate('/login')
 
 type FormsFields = z.infer<typeof schema>;
 
 const SignUp = () => {
 
+const navigate = useNavigate()
     const { register,
         handleSubmit,
         setError,
@@ -78,7 +78,7 @@ const SignUp = () => {
             const user = userCredential.user;
        
             reset()
-            // navigate('/login')
+            navigate('/')
         } catch (error: any) {
             if (error.code === "auth/email-already-in-use") {
                 setError("root", {
