@@ -8,7 +8,7 @@ import {
     signInWithEmailAndPassword,
 } from "firebase/auth";
 import { auth } from './firebase/firebaseConfig'
-
+import { useNavigate } from "react-router-dom"
 
 const schema = z.object({
   email: z.email(),
@@ -22,7 +22,7 @@ const schema = z.object({
 type FormsFields = z.infer<typeof schema>;
 
 const Login = () => {
-
+const navigate = useNavigate();
   const { register,
     handleSubmit,
     setError,
@@ -43,6 +43,7 @@ const Login = () => {
       const user = userCredential.user;
     
       reset()
+       navigate('/dashboard')
     }catch (error: any) {
   if (error.code === "auth/invalid-credential") {
     setError("root", {

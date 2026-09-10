@@ -1,7 +1,6 @@
 import AuthLayout from "./components/layout/AppRoutes"
 
 
-
 const App = () => {
   return (
     <div>
