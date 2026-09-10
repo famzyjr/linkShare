@@ -253,7 +253,7 @@ const SignUp = () => {
                   {/* Button */}
                   <button
                     disabled={isSubmitting}
-                    className="bg-[#633CFF] cursor-pointer rounded-lg w-99 h-11.5 text-[#FFFFFF]"
+                      className={ isSubmitting ? 'bg-[#633CFF40] cursor-pointer rounded-lg w-99 h-11.5 text-[#FFFFFF]':`  bg-[#633CFF] cursor-pointer rounded-lg w-99 h-11.5 text-[#FFFFFF]`}
                   >
                     {isSubmitting ? "Loading..." : "Login"}
                   </button>
@@ -271,7 +271,7 @@ const SignUp = () => {
                         className="text-[#633CFF]"
                       >
                         <Link to="/login">
-                          {isSubmitting ? "Loading..." : "Create account"}
+                           Login
                         </Link>
                       </button>
 
