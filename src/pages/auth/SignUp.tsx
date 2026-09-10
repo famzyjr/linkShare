@@ -158,7 +158,7 @@ const SignUp = () => {
                         type="text"
                         placeholder="e.g. alex@email.com"
                         id="email"
-                        className="w-[396px] h-12 rounded-lg border-2 border-[#D9D9D9] py-3 px-4 pl-12 outline-none"
+                        className="w-99 focus:outline-none focus:ring-2 focus:ring-[#633CFF] focus:border-transparent h-12 rounded-lg border-2 border-[#D9D9D9] py-3 px-4 pl-12 outline-none"
                       />
 
                     </div>
@@ -193,7 +193,7 @@ const SignUp = () => {
                         {...register("password")}
                         id="password"
                         placeholder="Enter Your password"
-                        className="w-[396px] h-12 rounded-lg border-2 border-[#D9D9D9] py-3 px-4 pl-12 outline-none"
+                        className="w-99 focus:outline-none focus:ring-2 focus:ring-[#633CFF] focus:border-transparent h-12 rounded-lg border-2 border-[#D9D9D9] py-3 px-4 pl-12 outline-none"
                       />
 
                     </div>
@@ -228,7 +228,7 @@ const SignUp = () => {
                         {...register("confirmPassword")}
                         id="confirmPassword"
                         placeholder="Enter Your password"
-                        className="w-[396px] h-12 rounded-lg border-2 border-[#D9D9D9] py-3 px-4 pl-12 outline-none"
+                        className="w-99 focus:outline-none focus:ring-2 focus:ring-[#633CFF] focus:border-transparent h-12 rounded-lg border-2 border-[#D9D9D9] py-3 px-4 pl-12 outline-none"
                       />
 
                     </div>
