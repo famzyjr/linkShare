@@ -83,7 +83,7 @@ const SignUp = () => {
         data.password,
       );
 
-      const user = userCredential.user;
+       userCredential.user;
 
       reset();
       navigate("/dashboard");

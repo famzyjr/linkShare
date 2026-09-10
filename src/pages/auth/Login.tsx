@@ -46,7 +46,7 @@ const Login = () => {
       );
 
       // The signed-in user info
-      const user = userCredential.user;
+      userCredential.user;
 
       reset();
       navigate("/dashboard");
