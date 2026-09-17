@@ -21,7 +21,7 @@ const  LinkPreview: React.FC< LinkPreview> = ({
   const pulse = animate ? "animate-pulse" : "";
 
   return (
- <div className="bg-[#ffff] sm:bg-red-950 w-[560px] rounded-[12px] p-[20px]">
+ <div className="bg-[#ffff] max-sm:hidden w-[560px] rounded-[12px] p-[20px]">
      <div
       role="status"
       aria-busy={animate}
