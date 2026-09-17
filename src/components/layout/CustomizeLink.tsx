@@ -1,4 +1,4 @@
-import Text from "../Text";
+
 import getStarted from "../../assets/icons/Group 273.png";
 
 const CustomizeLink = () => {
