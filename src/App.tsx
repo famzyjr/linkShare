@@ -1,11 +1,13 @@
 import AuthLayout from "./components/layout/AppRoutes"
+import Dashboard from "./pages/dashboard/Dashboard"
 
 
 const App = () => {
   return (
     <div>
     <AuthLayout/>
-    </div>
+    <Dashboard/>
+        </div>
   )
 }
 
